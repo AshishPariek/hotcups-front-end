@@ -113,9 +113,13 @@
   flex-direction: column;
   box-shadow: 0px 1px 2px rgb(189, 189, 189);
 }
-.fromHeader {
+.formHeader {
   height: 25%;
   background-color: #ffa958;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 .formBody {
   height: 60%;
@@ -144,22 +148,32 @@
 }
 .adminDashboard {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
+.adminDashboardHeader {
+  margin-top: 1rem;
+  width: 70%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .totalShopList {
   display: flex;
   flex-direction: column;
   width: 70%;
-  padding: 3rem;
 }
 .shopListItems {
-  border: 1px dashed gray;
   display: flex;
   justify-content: space-between;
   margin: 1rem 0;
   padding: 1rem;
+  box-shadow: 1px 1px 3px rgb(192, 192, 192);
+  border-radius: 3px;
 }
 .shopListItemImage {
   height: 10rem;
@@ -178,4 +192,52 @@
 }
 .shopListEditBtn {
   padding: 4px;
+}
+.editFormContainer {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.editShopForm {
+  height: 85%;
+  width: 40%;
+  border-bottom: 2px solid #50a34b;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 5px rgb(195, 195, 195);
+}
+.editShopFormHeader {
+  height: 25%;
+  background-color: #50a34b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.editShopFormBody {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 75%;
+  align-self: center;
+  justify-content: space-evenly;
+}
+.editShopFormBody input {
+  padding: 5px;
+}
+.editShopFormBody button {
+  padding: 7px;
+  border: none;
+  background-color: #50a34b;
+  color: white;
+  cursor: pointer;
+}
+.editShopFormBody button:hover {
+  background-color: #59c254;
+}
+.logOutContainer {
+  display: flex;
+  background-color: #59c254;
+  width: 30%;
 }

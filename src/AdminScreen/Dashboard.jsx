@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [shops, setShops] = useState([]);
   const [fetching, setFetching] = useState(true);
 
@@ -26,8 +28,19 @@ const Dashboard = () => {
     }
   };
 
+  const addHandler = () => {
+    navigate("/Addshop");
+  };
+
   const editHandler = (id) => {
-    console.log(id);
+    navigate(`/EditShop/${id}`);
+  };
+
+  const logOutHandler = () => {
+    if (window.confirm("Are Sure want to LogOut")) {
+      localStorage.clear("admin");
+      navigate("/");
+    }
   };
 
   if (fetching) {
@@ -35,6 +48,26 @@ const Dashboard = () => {
   } else {
     return (
       <div className="adminDashboard">
+        <div className="adminDashboardHeader">
+          <button
+            onClick={addHandler}
+            style={{
+              padding: "7px",
+              border: "none",
+              backgroundColor: "#ffa958",
+              color: "white",
+              cursor: "pointer",
+            }}
+          >
+            Add
+            <i className="fa-solid fa-store"></i>
+          </button>
+          <i
+            onClick={logOutHandler}
+            style={{ cursor: "pointer" }}
+            className="fa-solid fa-right-from-bracket fa-xl"
+          ></i>
+        </div>
         <div className="totalShopList">
           {shops.map((shop, i) => {
             return (
@@ -51,23 +84,33 @@ const Dashboard = () => {
                 </div>
                 <div className="shopListItemsContacts items">
                   <h3>Contact :</h3>
-                  <a href="gmail.com">
-                    <i className="fa-solid fa-envelope"></i>-{shop.email}
+                  <a
+                    style={{ textDecoration: "none", color: "black" }}
+                    href="http://gmail.com"
+                  >
+                    <i
+                      style={{ color: "#FA8072" }}
+                      className="fa-solid fa-envelope"
+                    ></i>
+                    -{shop.email}
                   </a>
                   <span>
-                    <i className="fa-solid fa-phone"></i>
+                    <i
+                      style={{ color: "#00BFFF" }}
+                      className="fa-solid fa-phone"
+                    ></i>
                     {shop.contact_number}
                   </span>
                 </div>
                 <i
-                  class="fa-solid fa-pen-to-square"
-                  style={{ cursor: "pointer" }}
+                  className="fa-solid fa-pen-to-square"
+                  style={{ cursor: "pointer", color: "#3CB371" }}
                   onClick={() => editHandler(shop.id)}
                 ></i>
                 <i
-                  className="fa-solid fa-minus"
+                  className="fa-solid fa-trash "
                   onClick={() => deleteHandler(shop.id)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "#DC143C" }}
                 ></i>
               </div>
             );
