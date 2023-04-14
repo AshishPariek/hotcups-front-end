@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { logIn } from "../Store/adminSlice";
 import axios from "axios";
 
 const LogIn = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loginhandler = (e) => {
     const { name, value } = e.target;
@@ -23,8 +26,7 @@ const LogIn = () => {
           } else {
             if (res.data.value === "1") {
               toast.success("Login Suceed");
-              console.log(res.data);
-              localStorage.setItem("admin", JSON.stringify(res.data.auth));
+              dispatch(logIn({ token: res.data.auth }));
               navigate("/Dashboard");
             } else {
               toast.error("Please Check Password");

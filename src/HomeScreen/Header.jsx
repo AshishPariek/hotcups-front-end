@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+  const isAuthenticated = useSelector((state) => state.admin.isAuthenticated);
   const styleHandler = ({ isActive }) => {
     return {
       textDecoration: "none",
@@ -11,9 +13,6 @@ const Header = () => {
     };
   };
 
-  const admin = JSON.parse(localStorage.getItem("admin"));
-  // console.log("js", admin);
-
   return (
     <nav className="navBar">
       <NavLink style={styleHandler} to={"/"}>
@@ -21,8 +20,7 @@ const Header = () => {
       </NavLink>
       <NavLink
         style={styleHandler}
-        onClickCapture={() => console.log(admin)}
-        to={admin === null ? "/LogIn" : "/Dashboard"}
+        to={isAuthenticated ? "/Dashboard" : "/LogIn"}
       >
         <i className="fa-solid fa-user"></i>
       </NavLink>

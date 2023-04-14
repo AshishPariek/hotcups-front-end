@@ -1,4 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import shopSlice from "./ShopsSlice";
+import adminSlice from "./adminSlice";
 
-export const store = configureStore({ reducer: shopSlice.reducer });
+const root = combineReducers({
+  shop: shopSlice.reducer,
+  admin: adminSlice.reducer,
+});
+
+export const store = configureStore({ reducer: root });

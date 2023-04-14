@@ -6,10 +6,12 @@ import { addFeedback } from "../Store/ShopsSlice";
 const Shop = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const shops = useSelector((state) => state.allShops);
+  const shops = useSelector((state) => state.shop.allShops);
   const feedbackData = shops.filter((e) => {
     if (+id === e.id) {
       return e;
+    } else {
+      return [];
     }
   });
 
@@ -18,7 +20,7 @@ const Shop = () => {
     dislikes: feedbackData[0].dislikes,
   });
 
-  const feedbackHandler = (e) => {
+  const likeDislikeHandler = (e) => {
     const { name } = e.target;
     name === "likes"
       ? setFeedback((prev) => ({ ...prev, likes: prev.likes + 1 }))
@@ -30,20 +32,6 @@ const Shop = () => {
           : { likes: feedback.likes, dislikes: feedback.dislikes + 1, id }
       )
     );
-
-    // axios
-    //   .post("http://localhost:4500/hotcup/shop", {
-    //     likes: feedback.likes,
-    //     dislikes: feedback.dislikes,
-    //     id: id,
-    //   })
-    //   .then((result) => {
-    //     setdata((prev) => ({
-    //       ...prev,
-    //       likes: result.data[0].likes,
-    //       dislikes: result.data[0].dislikes,
-    //     }));
-    //   });
   };
 
   return (
@@ -67,26 +55,27 @@ const Shop = () => {
                 <button
                   className="feedback"
                   name="likes"
-                  onClick={feedbackHandler}
+                  onClick={likeDislikeHandler}
                 >
-                  {feedback.likes}
+                  {feedback?.likes}
                   Like
                 </button>
                 <button
                   className="feedback"
                   name="dislikes"
-                  onClick={feedbackHandler}
+                  onClick={likeDislikeHandler}
                 >
-                  {feedback.dislikes}
+                  {feedback?.dislikes}
                   Dislike
                 </button>
               </div>
             </div>
           );
+        } else {
+          return <></>;
         }
       })}
     </div>
   );
 };
-
 export default Shop;

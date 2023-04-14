@@ -13,6 +13,7 @@ const shopSlice = createSlice({
       const shops = action.payload;
       shop.allShops = shops;
     },
+
     addFeedback: (shop, action) => {
       const { likes, dislikes, id } = action.payload;
       axios

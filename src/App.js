@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { store } from "./Store/Store";
+import Protacted from "./ProtactedRoutes/Protacted";
 import Header from "./HomeScreen/Header";
 import Home from "./HomeScreen/Home";
 import AllShops from "./HomeScreen/AllShops";
@@ -18,12 +19,15 @@ import "./App.css";
 function App() {
   return (
     <>
-      <Header />
       <Provider store={store}>
+        <Header />
         <ToastContainer position="top-center" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route
+            path="/Dashboard"
+            element={<Protacted component={Dashboard} />}
+          />
           <Route path="/AddShop" element={<AddShop />} />
           <Route path="/AllShops" element={<AllShops />} />
           <Route path="/EditShop/:id" element={<EditShop />} />

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { logOut } from "../Store/adminSlice";
 import axios from "axios";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [shops, setShops] = useState([]);
   const [fetching, setFetching] = useState(true);
 
@@ -38,7 +41,7 @@ const Dashboard = () => {
 
   const logOutHandler = () => {
     if (window.confirm("Are Sure want to LogOut")) {
-      localStorage.clear("admin");
+      dispatch(logOut());
       navigate("/");
     }
   };
