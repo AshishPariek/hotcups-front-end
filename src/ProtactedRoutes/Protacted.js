@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
-import { toast } from "react-toastify";
 
 const Protacted = (props) => {
   const Dashboard = props.component;
